@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('benin-malanville.csv')
 
@@ -24,3 +25,30 @@ for column in ['GHI', 'DNI', 'DHI', 'ModA', 'ModB', 'WS', 'WSgust']:
 print("\nInvalid Values (Negative Check):")
 invalid = df[(df['GHI'] < 0) | (df['DNI'] < 0) | (df['DHI'] < 0)]
 print(f"Invalid rows:\n{invalid}")
+
+# Convert the 'Timestamp' column to datetime
+df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+
+# Plot GHI, DNI, DHI over time
+
+print(df.columns)
+
+plt.figure(figsize=(10, 6))
+plt.plot(df['Timestamp'], df['GHI'], label='GHI', color='blue')
+plt.plot(df['Timestamp'], df['DNI'], label='DNI', color='orange')
+plt.plot(df['Timestamp'], df['DHI'], label='DHI', color='green')
+plt.xlabel('Time')
+plt.ylabel('Irradiance (W/m²)')
+plt.title('Solar Irradiance Over Time')
+plt.legend()
+plt.show()
+
+# Plot Tamb over time
+plt.figure(figsize=(10, 6))
+plt.plot(df['Timestamp'], df['Tamb'], label='Ambient Temperature (Tamb)', color='red')
+plt.xlabel('Time')
+plt.ylabel('Temperature (°C)')
+plt.title('Ambient Temperature Over Time')
+plt.legend()
+plt.show()
+
