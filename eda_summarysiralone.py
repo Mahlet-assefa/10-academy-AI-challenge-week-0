@@ -1,5 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 df = pd.read_csv('sierraleone-bumbuna.csv')
 
@@ -73,5 +75,24 @@ plt.ylabel('ModB (W/m²)')
 plt.title('Impact of Cleaning on ModB Sensor Readings Over Time')
 plt.legend()
 plt.show()
+
+# Calculate the correlation matrix for the relevant columns
+correlation_columns = ['GHI', 'DNI', 'DHI', 'TModA', 'TModB', 'WS', 'WSgust', 'WD']
+correlation_matrix = df[correlation_columns].corr()
+
+# Display the correlation matrix
+print(correlation_matrix)
+
+#Plotting the heatmap
+plt.figure(figsize=(10, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+plt.title('Correlation Matrix of Solar Radiation, Temperature, and Wind Conditions')
+plt.show()
+
+# Create pair plot for a subset of variables
+sns.pairplot(df[['GHI', 'DNI', 'DHI', 'TModA', 'TModB', 'WS', 'WSgust']])
+plt.title('Pair Plot for Solar Radiation and Weather Variables')
+plt.show()
+
 
 
