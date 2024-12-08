@@ -48,3 +48,30 @@ plt.title('Ambient Temperature Over Time')
 plt.legend()
 plt.show()
 
+#cleaning data
+
+# Subset the data based on the Cleaning column
+cleaned_data = df[df['Cleaning'] == 1]
+non_cleaned_data = df[df['Cleaning'] == 0]
+
+# Plot ModA and ModB for cleaned vs non-cleaned data
+plt.figure(figsize=(12, 6))
+plt.plot(cleaned_data['Timestamp'], cleaned_data['ModA'], label='ModA (Cleaned)', color='green')
+plt.plot(non_cleaned_data['Timestamp'], non_cleaned_data['ModA'], label='ModA (Non-Cleaned)', color='red', alpha=0.6)
+plt.xlabel('Time')
+plt.ylabel('ModA (W/m²)')
+plt.title('Impact of Cleaning on ModA Sensor Readings Over Time')
+plt.legend()
+plt.show()
+
+# Similarly for ModB
+plt.figure(figsize=(12, 6))
+plt.plot(cleaned_data['Timestamp'], cleaned_data['ModB'], label='ModB (Cleaned)', color='blue')
+plt.plot(non_cleaned_data['Timestamp'], non_cleaned_data['ModB'], label='ModB (Non-Cleaned)', color='orange', alpha=0.6)
+plt.xlabel('Time')
+plt.ylabel('ModB (W/m²)')
+plt.title('Impact of Cleaning on ModB Sensor Readings Over Time')
+plt.legend()
+plt.show()
+
+
